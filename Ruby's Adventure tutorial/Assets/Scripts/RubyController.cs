@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RubyController : MonoBehaviour
 {
@@ -8,13 +10,22 @@ public class RubyController : MonoBehaviour
 
     public int maxHealth = 5;
 
+    public int score = 0;
+    public GameObject scoreText;
+    public string scoreMessage;
+
+    TextMeshProUGUI scoreMessageText;
+
     public GameObject projectilePrefab;
+
+    public ParticleSystem healthEffect;
+    public ParticleSystem hitEffect;
 
     public AudioClip throwSound;
     public AudioClip hitSound;
 
     public int health { get { return currentHealth; } }
-    int currentHealth;
+    public int currentHealth;
 
     public float timeInvincible = 2.0f;
     bool isInvincible;
@@ -28,6 +39,8 @@ public class RubyController : MonoBehaviour
     Vector2 lookDirection = new Vector2(1, 0);
 
     AudioSource audioSource;
+    
+      
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +51,8 @@ public class RubyController : MonoBehaviour
         currentHealth = maxHealth;
 
         audioSource = GetComponent<AudioSource>();
+
+        scoreMessageText = scoreText.GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
@@ -103,13 +118,25 @@ public class RubyController : MonoBehaviour
 
             isInvincible = true;
             invincibleTimer = timeInvincible;
-
+            Instantiate(hitEffect, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
             PlaySound(hitSound);
+        }
+        
+        if (amount > 0)
+        {
+          Instantiate(healthEffect, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
         }
 
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
 
         UIHealthBar.instance.SetValue(currentHealth / (float)maxHealth);
+    }
+    
+    public void ChangeScore(int scoreAmount)
+    {
+        score = score + scoreAmount;
+        scoreMessageText.text = "Fixed Robots: " + score.ToString() + "/4";
+        Debug.Log(score);
     }
 
     void Launch()

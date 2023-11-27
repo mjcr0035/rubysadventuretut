@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class EnemyController : MonoBehaviour
     AudioSource audioSource;
     Animator animator;
 
+    private RubyController rubyController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +27,18 @@ public class EnemyController : MonoBehaviour
         timer = changeTime;
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+
+        GameObject rubyControllerObject = GameObject.FindWithTag("rubyController");
+
+        if (rubyControllerObject != null)
+        {
+            rubyController = rubyControllerObject.GetComponent<RubyController>();
+            print("Found the RubyController Script!");
+        }
+        if (rubyController == null)
+        {
+            print("Cannot find GameController Script!");
+        }
     }
 
     void Update()
@@ -42,6 +57,7 @@ public class EnemyController : MonoBehaviour
             timer = changeTime;
         }
     }
+
 
     void FixedUpdate()
     {
@@ -87,6 +103,9 @@ public class EnemyController : MonoBehaviour
         smokeEffect.Stop();
         audioSource.Stop();
         animator.SetTrigger("Fixed");
-        
+
+        rubyController.ChangeScore(+1);
+       
+
     }
 }
