@@ -107,12 +107,16 @@ MonoBehaviour:
   maxHealth: 5
   score: 0
   scoreText: {fileID: 0}
+  healthPickup: {fileID: 9082599828936254897, guid: 2ae7d535f5a37ee4ab8bf465f15bcee4, type: 3}
+  scoreMessage: 
   projectilePrefab: {fileID: 3661135456824023061, guid: 454a97c07e75e20428ca8cc1b1e99534, type: 3}
   healthEffect: {fileID: 4323902500545637748, guid: 03b349638dd023c44ba1a22622903397, type: 3}
   hitEffect: {fileID: 8430113441058854423, guid: 8739edf341d79da4f97278eb02123682, type: 3}
   throwSound: {fileID: 8300000, guid: b2edfd40873655249ba0e01a5cf705be, type: 3}
   hitSound: {fileID: 8300000, guid: 9b1bb1f450b7d444fa4a8019d13519a7, type: 3}
-  currentHealth: 0
+  ghost: {fileID: 8300000, guid: ed309cbbc1f3ddf459ca8fd78c1aaa42, type: 3}
+  ghostbro: {fileID: 8300000, guid: 54b3b165b6ba458488f4e3f0d799d387, type: 3}
+  currentHealth: 5
   timeInvincible: 2
 --- !u!50 &4005749180842061768
 Rigidbody2D:

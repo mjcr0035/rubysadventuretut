@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController1 : MonoBehaviour
 {
     public float speed;
     public bool vertical;

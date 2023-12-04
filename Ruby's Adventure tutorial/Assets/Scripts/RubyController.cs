@@ -12,6 +12,7 @@ public class RubyController : MonoBehaviour
 
     public int score = 0;
     public GameObject scoreText;
+    public GameObject healthPickup;
     public string scoreMessage;
 
     TextMeshProUGUI scoreMessageText;
@@ -23,6 +24,8 @@ public class RubyController : MonoBehaviour
 
     public AudioClip throwSound;
     public AudioClip hitSound;
+    public AudioClip ghost;
+    public AudioClip ghostbro;
 
     public int health { get { return currentHealth; } }
     public int currentHealth;
@@ -91,10 +94,27 @@ public class RubyController : MonoBehaviour
             if (hit.collider != null)
             {
                 NonPlayerCharacter character = hit.collider.GetComponent<NonPlayerCharacter>();
+                NonPlayerCharacter1 character1 = hit.collider.GetComponent<NonPlayerCharacter1>();
+                NonPlayerCharacter2 character2 = hit.collider.GetComponent<NonPlayerCharacter2>();
                 if (character != null)
                 {
                     character.DisplayDialog();
                 }
+                if (character1 != null)
+                {
+                    character1.DisplayDialog();
+                    
+                    PlaySound(ghost);
+                }
+                if (character2 != null)
+                {
+                    character2.DisplayDialog();
+                    GameObject health = GameObject.Instantiate(healthPickup);
+                    Transform t = health.transform;
+                    t.position = new Vector2(-14.3f, 12f);
+                    PlaySound(ghostbro);
+                }
+
             }
         }
     }
